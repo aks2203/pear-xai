@@ -17,7 +17,7 @@ with open(os.path.join(here, "README.md"), encoding="utf-8") as f:
 os.system("pip install torch==1.11.0")
 
 setup(name="pear-xai",
-      version="v0.1",
+      version="v0.0.1",
       description="PEAR: Post-hoc Explainer Agreement Regularization",
       url="https://arthur.ai",
       keywords=["pytorch", "XAI", "machine learning"],
