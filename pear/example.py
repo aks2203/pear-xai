@@ -40,7 +40,7 @@ def run_example():
 
     # Get data
     here = Path(__file__).parent
-    loader_train, loader_test, num_classes = pear.get_data(dataset, batch_size, data_path=os.path.join(here, "../datasets"))
+    loader_train, loader_test, num_classes = pear.get_data(dataset, batch_size, data_path=os.path.join(here, "datasets/"))
     input_dim = loader_train.dataset.data.shape[1]
     num_training_data = loader_train.dataset.data.shape[0]
     num_testing_data = loader_test.dataset.data.shape[0]

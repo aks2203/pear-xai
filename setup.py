@@ -2,7 +2,7 @@ import os
 import sys
 from io import open
 
-from setuptools import setup
+from setuptools import setup, find_packages
 
 
 here = os.path.abspath(os.path.dirname(__file__))
@@ -23,7 +23,9 @@ setup(name="pear-xai",
       keywords=["pytorch", "XAI", "machine learning"],
       long_description=long_description,
       long_description_content_type="text/markdown",
-      py_modules=["pear"],
+      packages=find_packages(),
+      include_package_data=True,
+      package_data={"": ["datasets/*/*.csv"]},
       python_requires=">=3.9",
       install_requires=[
           "jupyter==1.0.0",
@@ -39,5 +41,5 @@ setup(name="pear-xai",
           "torchvision==0.12.0",
           "tqdm==4.64.0",
           "torchsort==0.1.9"],
-      license="MIT")
+      license="BSD3")
 
