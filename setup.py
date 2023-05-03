@@ -16,7 +16,7 @@ with open(os.path.join(here, "README.md"), encoding="utf-8") as f:
 # the torch package is also listed in install_requires as this seems to be needed too
 os.system("pip install torch==1.11.0")
 
-setup(name="pear",
+setup(name="pear-xai",
       version="v0.1",
       description="PEAR: Post-hoc Explainer Agreement Regularization",
       url="https://arthur.ai",
@@ -26,7 +26,6 @@ setup(name="pear",
       py_modules=["pear"],
       python_requires=">=3.9",
       install_requires=[
-          "captum @ git+https://github.com/aks2203/captum",
           "jupyter==1.0.0",
           "lime==0.2.0.1",
           "matplotlib==3.5.2",
