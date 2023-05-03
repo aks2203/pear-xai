@@ -1,12 +1,7 @@
 # :pear: PEAR: Post-hoc Explainer Agreement Regularization
 
-A repo for training neural networks for post hoc explainer agreement. More details about the results can be found at
-<insert_link_here>
+A repo for training neural networks for post hoc explainer agreement. More details about the results can be found in our paper titled [Reckoning with the Disagreement Problem: Explanation Consensus as a Training Objective](https://arxiv.org/pdf/2303.13299.pdf).
 
-
-[//]: # (## Citing Our Work)
-[//]: # ()
-[//]: # (To cite our work, please reference the appropriate paper.)
 
 ## Getting Started
 
@@ -34,3 +29,17 @@ ________________________________________________________________________________
 ## Contributing
 
 We believe in open-source community driven software development. Please open issues and pull requests with any questions or improvements you have.
+
+
+## Citing Our Work
+
+To cite our work, please reference the paper linked above with the following citation.
+
+```
+@article{schwarzschild2023reckoning,
+  title={Reckoning with the Disagreement Problem: Explanation Consensus as a Training Objective},
+  author={Schwarzschild, Avi and Cembalest, Max and Rao, Karthik and Hines, Keegan and Dickerson, John},
+  journal={arXiv preprint arXiv:2303.13299},
+  year={2023}
+}
+```
