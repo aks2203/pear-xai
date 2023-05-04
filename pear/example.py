@@ -14,7 +14,7 @@ import pear
 
 
 def run_example():
-    logging.basicConfig(level=logging.DEBUG,
+    logging.basicConfig(level=logging.INFO,
                         format="[%(asctime)s %(levelname)s]: %(message)s",
                         datefmt="%m/%d/%Y %H:%M:%S")
     logging.info("\n_________________________________________________\n")
