@@ -4,8 +4,8 @@ disagreement loss fucntions.
 """
 
 import torch
-import torchsort
 
+from fast_soft_sort import pytorch_ops
 from .explainers import Explainer
 
 
@@ -32,19 +32,19 @@ def pearson(raw_feature_scores_a: torch.Tensor, raw_feature_scores_b: torch.Tens
 
 def soft_spearman(raw_feature_scores_a: torch.Tensor, raw_feature_scores_b: torch.Tensor, reduction="mean") -> float:
     """
-    Function to compute approximate spearman using torchsort ranking
+    Function to compute approximate spearman using fast_soft_sort ranking
     :param raw_feature_scores_a: feature important scores a
     :param raw_feature_scores_b: feature important scores b
     :param reduction: method to reduce output vector
     :return:
     """
     scores_a = torch.abs(raw_feature_scores_a)
-    rank_a = torchsort.soft_rank(scores_a, regularization_strength=0.2)
+    rank_a = pytorch_ops.soft_rank(scores_a, regularization_strength=0.2)
     rank_a = rank_a - rank_a.mean(dim=1).unsqueeze(1)
     rank_a = rank_a / rank_a.norm(dim=1).unsqueeze(1)
 
     scores_b = torch.abs(raw_feature_scores_b)
-    rank_b = torchsort.soft_rank(scores_b, regularization_strength=0.2)
+    rank_b = pytorch_ops.soft_rank(scores_b, regularization_strength=0.2)
     rank_b = rank_b - rank_b.mean(dim=1).unsqueeze(1)
     rank_b = rank_b / rank_b.norm(dim=1).unsqueeze(1)
 
