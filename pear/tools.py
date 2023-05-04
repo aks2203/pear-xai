@@ -15,32 +15,19 @@ class TabularDataLoader(torch.utils.data.Dataset):
     def __init__(self, path, filename, label, scale="minmax"):
 
         self.path = path
-
-        if not os.path.isfile(path + filename):
-            raise RuntimeError(f"Dataset not found at {path + filename}. You can use download=True to download it")
-
         self.dataset = pd.read_csv(path + filename)
         self.target = label
-
-        # Save target and predictors
         self.X = self.dataset.drop(self.target, axis=1)
-
-        # Save feature names
         self.feature_names = self.X.columns.to_list()
         self.target_name = label
-
-        # Transform data
         if scale == 'minmax':
             self.scaler = MinMaxScaler()
         elif scale == 'standard':
             self.scaler = StandardScaler()
         else:
-            raise NotImplementedError(
-                "The current version of DataLoader class only provides the following "
-                "transformations: {minmax, standard}")
+            raise NotImplementedError("only minmax, standard scaling")
 
         self.scaler.fit_transform(self.X)
-
         self.data = self.scaler.transform(self.X)
         self.targets = self.dataset[self.target]
 
@@ -52,20 +39,14 @@ class TabularDataLoader(torch.utils.data.Dataset):
         # select correct row with idx
         if isinstance(idx, torch.Tensor):
             idx = idx.tolist()
-
-        if 'Synthetic' in self.path:
-            return (self.data[idx], self.targets.values[idx], self.weights[idx], self.masks[idx],
-                    self.masked_weights[idx], self.probs[idx], self.cluster_idx[idx])
-        else:
-            return self.data[idx], self.targets.values[idx]
+        return self.data[idx], self.targets.values[idx]
 
 
 def get_data(dataset: str, batch_size: int, data_path="./datasets"):
     """
     Helper function to get data-loaders for different datasets
     """
-    if dataset in ["bankmarketing", "californiahousing", "electricity", "eyemovement", "magictelescope",
-                   "phoneme", "telecommarketing"]:
+    if dataset in ["bankmarketing", "californiahousing", "electricity"]:
         dataset_train = TabularDataLoader(path=f"{data_path}/{dataset}/",
                                           filename=f"{dataset}-train.csv",
                                           label="class")
@@ -77,9 +58,7 @@ def get_data(dataset: str, batch_size: int, data_path="./datasets"):
         loader_train = DataLoader(dataset_train, batch_size=batch_size, shuffle=True)
         loader_test = DataLoader(dataset_test, batch_size=batch_size, shuffle=True)
         num_classes = 2
-    elif dataset in ["corrupt-bankmarketing", "corrupt-californiahousing", "corrupt-electricity",
-                     "corrupt-eyemovement", "corrupt-magictelescope",
-                     "phoneme", "corrupt-telecommarketing"]:
+    elif dataset in ["corrupt-bankmarketing", "corrupt-californiahousing", "corrupt-electricity"]:
         dataset_train = TabularDataLoader(path=f"{data_path}/{dataset[8:]}/",
                                           filename=f"{dataset[8:]}-train.csv",
                                           label="class")
