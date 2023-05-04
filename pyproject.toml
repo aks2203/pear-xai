@@ -2,11 +2,6 @@
 requires = ["setuptools", "setuptools-scm"]
 build-backend = "setuptools.build_meta"
 
-
-[tool.setuptools]
-py-modules = ['captum', 'notebooks', 'pear', 'torchsort']
-
-
 [project]
 name = "pear-xai"
 description = "PEAR: Post-hoc Explainer Agreement Regularization"
@@ -32,6 +27,15 @@ dependencies = ["jupyter==1.0.0",
                 "torchvision==0.12.0",
                 "tqdm==4.64.0"]
 version = "0.0.3"
+
+[tools.setuptools]
+include-package-data = true
+
+[tool.setuptools.packages]
+find = {}
+
+[tool.setuptools.package-data]
+mypkg = ["datasets/*/*.csv"]
 
 [project.urls]
 homepage = "https://arthur.ai"
